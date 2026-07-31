@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guillem Campeny Ferrer — CV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#1E5A8A;
+    --blue-soft:#EAF1F6;
+    --green:#3D8168;
+    --gray:#6B7280;
+    --gray-lt:#9AA3AD;
+    --ink:#1F2328;
+    --sub:#3D4148;
+    --rule:#E3E8ED;
+    --dot-off:#CBD3DB;
+    --page:#F4F6F8;
+    --card:#FFFFFF;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    background:var(--page);
+    color:var(--ink);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    padding:32px 16px 64px;
+  }
+  .card{
+    max-width:860px;margin:0 auto;background:var(--card);
+    border-radius:14px;
+    box-shadow:0 1px 2px rgba(20,40,60,.04),0 12px 40px rgba(20,40,60,.08);
+    padding:44px 46px 48px;
+  }
+
+  /* header */
+  .top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;
+    border-bottom:2px solid var(--blue);padding-bottom:16px;margin-bottom:6px;}
+  .name{font-size:30px;font-weight:700;letter-spacing:.06em;color:var(--blue);margin:0 0 4px;line-height:1.1;}
+  .headline{font-size:14px;color:var(--gray);letter-spacing:.02em;}
+  .headline b{color:var(--sub);font-weight:500;}
+
+  /* controls */
+  .controls{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0;}
+  .seg{display:inline-flex;border:1px solid var(--rule);border-radius:999px;overflow:hidden;background:#fff;}
+  .seg button{appearance:none;border:0;background:transparent;font:inherit;font-weight:600;
+    font-size:12px;letter-spacing:.06em;color:var(--gray);padding:7px 14px;cursor:pointer;transition:.15s;}
+  .seg button.active{background:var(--blue);color:#fff;}
+  .seg button:not(.active):hover{background:var(--blue-soft);color:var(--blue);}
+  .print{appearance:none;border:1px solid var(--rule);background:#fff;border-radius:999px;
+    font:inherit;font-size:12px;font-weight:500;color:var(--gray);padding:6px 12px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;transition:.15s;}
+  .print:hover{border-color:var(--blue);color:var(--blue);}
+  .print svg{width:13px;height:13px;}
+
+  /* layout */
+  .grid{display:grid;grid-template-columns:1fr 1.92fr;gap:38px;margin-top:26px;}
+  @media(max-width:720px){
+    .grid{grid-template-columns:1fr;gap:8px;}
+    .card{padding:30px 24px 34px;}
+    .top{flex-direction:column;}
+    .controls{align-items:flex-start;flex-direction:row;}
+  }
+
+  /* section titles */
+  .sec{display:flex;align-items:center;gap:8px;color:var(--blue);
+    font-size:12.5px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;
+    padding-bottom:7px;border-bottom:1px solid var(--rule);margin:26px 0 12px;}
+  .sec:first-child{margin-top:0;}
+  .sec svg{width:15px;height:15px;stroke:var(--blue);fill:none;stroke-width:2;
+    stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
+  aside .sec:first-of-type{margin-top:0;}
+
+  /* contact */
+  .crow{display:flex;align-items:flex-start;gap:9px;font-size:13px;color:var(--ink);margin:0 0 7px;}
+  .crow svg{width:13px;height:13px;stroke:var(--blue);fill:none;stroke-width:2;
+    stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;margin-top:3px;}
+  .crow a{color:var(--ink);text-decoration:none;}
+  .crow a:hover{color:var(--blue);text-decoration:underline;}
+
+  /* languages */
+  .lang{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 8px;}
+  .lang .lx{font-size:13px;}
+  .lang .lx b{font-weight:500;color:var(--ink);}
+  .lang .lx span{color:var(--gray);font-size:11.5px;margin-left:5px;}
+  .dots{display:inline-flex;gap:3px;flex-shrink:0;}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--dot-off);}
+  .dot.on{background:var(--green);}
+
+  /* generic sidebar item */
+  .item{margin:0 0 12px;}
+  .item .per{font-size:11px;font-weight:600;letter-spacing:.05em;color:var(--gray);text-transform:uppercase;}
+  .item .txt{font-size:13px;color:var(--ink);margin-top:1px;}
+  .tech b{display:block;font-size:13px;color:var(--ink);margin-top:8px;}
+  .tech span{font-size:13px;color:var(--gray);}
+
+  /* profile */
+  .profile{font-size:14px;color:var(--sub);margin:2px 0 4px;}
+
+  /* experience */
+  .exp{border-bottom:1px solid var(--rule);}
+  .exp:last-child{border-bottom:0;}
+  .exp-head{width:100%;text-align:left;background:transparent;border:0;font:inherit;
+    display:flex;justify-content:space-between;align-items:baseline;gap:14px;
+    padding:13px 8px 13px 0;cursor:default;border-radius:8px;transition:background .15s;}
+  .exp.expandable .exp-head{cursor:pointer;padding-left:10px;margin-left:-10px;}
+  .exp.expandable .exp-head:hover{background:var(--blue-soft);}
+  .exp-head:focus-visible{outline:2px solid var(--blue);outline-offset:2px;}
+  .exp-l{min-width:0;}
+  .role{font-size:14.5px;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .chev{width:15px;height:15px;stroke:var(--blue);fill:none;stroke-width:2.2;
+    stroke-linecap:round;stroke-linejoin:round;transition:transform .28s ease;flex-shrink:0;}
+  .exp.open .chev{transform:rotate(180deg);}
+  .cco{display:block;font-size:13px;margin-top:2px;}
+  .cco + .cco{margin-top:4px;}
+  .cco b{color:var(--blue);font-weight:600;}
+  .cco i{color:var(--gray);font-style:italic;margin-left:6px;}
+  .subdate{color:var(--gray);font-size:12px;margin-left:8px;white-space:nowrap;}
+  .dates{font-size:12px;color:var(--gray);white-space:nowrap;flex-shrink:0;padding-top:1px;}
+  .note{font-size:13px;color:var(--sub);padding:0 8px 13px 0;margin-top:-4px;}
+
+  /* collapsible */
+  .exp-desc{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease;}
+  .exp.open .exp-desc{grid-template-rows:1fr;}
+  .exp-desc>div{overflow:hidden;}
+  .exp-desc ul{margin:0;padding:2px 4px 16px 6px;list-style:none;}
+  .exp-desc li{position:relative;padding-left:18px;font-size:13px;color:var(--sub);margin-bottom:6px;line-height:1.45;}
+  .exp-desc li::before{content:"";position:absolute;left:2px;top:8px;width:5px;height:5px;
+    border-radius:50%;background:var(--green);}
+
+  .foot{max-width:860px;margin:16px auto 0;text-align:center;font-size:11px;color:var(--gray-lt);}
+
+  @media print{
+    body{background:#fff;padding:0;}
+    .card{box-shadow:none;border-radius:0;max-width:none;padding:0;}
+    .controls,.foot{display:none;}
+    .exp.expandable .exp-head{cursor:default;padding-left:0;margin-left:0;}
+    .exp-desc{grid-template-rows:1fr;}
+    .chev{display:none;}
+    .exp-head:hover{background:transparent;}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+  <main class="card" id="cv"></main>
+  <p class="foot" id="foot"></p>
+
+<script>
+const IC = {
+  user:'<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+  briefcase:'<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>',
+  cap:'<path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1 2.7 3 6 3s6-2 6-3v-5"/><path d="M22 10v6"/>',
+  award:'<circle cx="12" cy="8" r="6"/><path d="M15.5 13.6 17 22l-5-3-5 3 1.5-8.4"/>',
+  globe:'<circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2Z"/>',
+  monitor:'<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/>',
+  pin:'<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/>',
+  phone:'<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/>',
+  mail:'<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/>',
+  calendar:'<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+  flag:'<path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/>',
+  chev:'<path d="m6 9 6 6 6-6"/>'
+};
+const svg=(n,cls)=>`<svg class="${cls||''}" viewBox="0 0 24 24">${IC[n]}</svg>`;
+
+const DATA = {
+  en:{
+    name:"GUILLEM CAMPENY FERRER",
+    headline:'<b>Digital Marketing &amp; Event Manager</b> &nbsp;·&nbsp; Ski Instructor',
+    hint:"Tip: click the highlighted roles to expand what they involved.",
+    sec:{contact:"Contact",profile:"Profile",experience:"Professional experience",education:"Education",languages:"Languages",tech:"Technical skills",certificates:"Certificates"},
+    contact:{
+      address:"Pleta de l'Aldosa 2B — La Massana, Andorra (AD400)",
+      phone1:"+376 661 535", phone2:"+41 76 263 28 90",
+      email:"guimcampeny@gmail.com",
+      birth:"18 Sep 1998 · Ordino, Andorra",
+      nationality:"Andorran nationality"
+    },
+    profile:"Marketing and event professional with a strong sports background and an international career spanning Andorra, Switzerland, Austria, Spain and France. I combine hands-on event and marketing management with digital skills, and I am currently specialising in artificial intelligence. Comfortable leading projects in fast-paced, multicultural environments, and fluent in five languages.",
+    languages:[
+      {name:"Catalan / Spanish",level:"Native",dots:5},
+      {name:"English",level:"Advanced (IELTS)",dots:4},
+      {name:"French",level:"Advanced",dots:4},
+      {name:"Italian",level:"Basic",dots:2},
+      {name:"Portuguese",level:"Basic",dots:2},
+      {name:"German",level:"Basic",dots:2}
+    ],
+    tech:[
+      {label:"Microsoft Office",value:"Word · Excel · PowerPoint"},
+      {label:"Editing & Design",value:"CapCut · Canva · Photoshop · Lightroom"},
+      {label:"AI",value:"ChatGPT · Claude"}
+    ],
+    education:[
+      {per:"2024 – 2026",txt:"Master's in Digital Marketing — UEMC, Madrid"},
+      {per:"2025 – Present",txt:"Master's in Artificial Intelligence — Big IA School, Madrid"},
+      {per:"2018 – 2020",txt:"Bachelor's (Licence) in Sport Science, Event Management & Marketing (STAPS) — UPVD, Perpignan (France)"},
+      {per:"2020 – 2021",txt:"IELTS English Certification — UBC IELTS Institute, Canada"}
+    ],
+    certificates:[
+      {per:"2020 – 2021",txt:"Ski Instructor Level 2A — EFPEM, Andorra (Telemark · Freestyle · Competition)"},
+      {per:"2018 – 2019",txt:"High Ropes Course Operator (OPAH, State Diploma) — France"}
+    ],
+    experience:[
+      {role:"Marketing Manager (70%) & Ski Instructor (30%)",company:"Adrenaline Ski School",location:"Verbier, Switzerland",dates:"Nov 2024 – Present",
+       details:[
+        "Plan and manage paid campaigns on Meta Ads and Google Ads.",
+        "Monitor campaign performance, budgets, conversions, CPC, CPL, CTR and ROAS.",
+        "Optimize campaigns based on performance data and business objectives.",
+        "Conduct keyword research, audience targeting and competitor analysis.",
+        "Create and test ad copies, creatives and landing page suggestions.",
+        "Track leads and campaign results through proper reporting.",
+        "Coordinate with the design/content team for ad creatives and campaign requirements.",
+        "Share weekly/monthly performance reports with insights and recommendations."
+      ]},
+      {role:"Marketing Assistant",company:"Cirkel Supply",location:"Le Châble, Switzerland",dates:"Aug 2024 – Nov 2024",
+       details:[
+        "Assist in planning and executing digital marketing campaigns across multiple channels.",
+        "Support the management of Meta Ads and Google Ads campaigns under the supervision of the marketing team.",
+        "Monitor campaign performance and prepare basic reports on key metrics such as CPC, CTR, conversions and engagement.",
+        "Create and schedule content for social media platforms.",
+        "Assist in writing marketing copy for advertisements, emails, blogs and social media posts.",
+        "Conduct market research and competitor analysis to identify trends and opportunities.",
+        "Help maintain and update the company website and landing pages.",
+        "Coordinate with designers and content creators to prepare marketing materials.",
+        "Track leads and assist in maintaining CRM records.",
+        "Help organize promotional events, product launches and marketing activities.",
+        "Assist in preparing weekly and monthly marketing performance reports."
+      ]},
+      {role:"Marketing & Event Manager",company:"Snowdon AG (Hotel Schweizerhof)",location:"Saas-Fee, Switzerland",dates:"Jun 2022 – Apr 2024",
+       details:[
+        "Plan and coordinate corporate events, promotional activities and brand experiences from concept to execution.",
+        "Manage event logistics, including venues, suppliers, schedules, budgets and on-site operations.",
+        "Develop and execute event marketing campaigns to maximize attendance and engagement.",
+        "Oversee event budgets, negotiate with suppliers and monitor expenses.",
+        "Lead on-site event setup, coordination and troubleshooting during live events.",
+        "Create promotional materials and collaborate with the design team for event branding.",
+        "Manage event registrations, attendee communications and post-event follow-ups.",
+        "Build and maintain relationships with partners, sponsors and local organizations.",
+        "Ensure all events align with the company's brand identity and business objectives.",
+        "Identify new event opportunities to increase brand awareness and customer engagement."
+      ]},
+      {role:"Ski Instructor",dates:"Dec 2021 – Apr 2023",companies:[
+        {name:"Snow Academy Ski School",location:"Saalbach, Austria",period:"Dec 2022 – Apr 2023"},
+        {name:"ESKIMOS Ski School",location:"Switzerland",period:"Dec 2021 – May 2022"}
+      ]},
+      {role:"Surf Instructor & Event Manager",company:"Islares Surf Camp",location:"Spain",dates:"Jun 2021 – Sep 2021"},
+      {role:"Animation & Event Logistics",company:"Belambra",location:"Borgo, Corsica (France)",dates:"Jun 2019 – Oct 2019"},
+      {role:"Sector Assistant Coordinator — UCI MTB World Cup",company:"Vallnord S.A.",location:"Andorra",dates:"Jun 2018 – Sep 2018",
+       note:"Coordinated sector logistics for the UCI Mountain Bike World Cup (Downhill & Cross-Country)."}
+    ]
+  },
+  ca:{
+    name:"GUILLEM CAMPENY FERRER",
+    headline:'<b>Màrqueting Digital i Gestió d\'Esdeveniments</b> &nbsp;·&nbsp; Monitor d\'Esquí',
+    hint:"Consell: fes clic als càrrecs destacats per desplegar en què consistien.",
+    sec:{contact:"Contacte",profile:"Perfil",experience:"Experiència professional",education:"Formació",languages:"Idiomes",tech:"Competències tècniques",certificates:"Certificats i titulacions"},
+    contact:{
+      address:"Pleta de l'Aldosa 2B — La Massana, Andorra (AD400)",
+      phone1:"+376 661 535", phone2:"+41 76 263 28 90",
+      email:"guimcampeny@gmail.com",
+      birth:"18 set. 1998 · Ordino, Andorra",
+      nationality:"Nacionalitat andorrana"
+    },
+    profile:"Professional del màrqueting i els esdeveniments, amb una sòlida trajectòria esportiva i una carrera internacional entre Andorra, Suïssa, Àustria, Espanya i França. Combino la gestió pràctica d'esdeveniments i màrqueting amb competències digitals i, actualment, m'estic especialitzant en intel·ligència artificial. Còmode liderant projectes en entorns dinàmics i multiculturals, i amb domini de cinc idiomes.",
+    languages:[
+      {name:"Català / Castellà",level:"Nadiu",dots:5},
+      {name:"Anglès",level:"Avançat (IELTS)",dots:4},
+      {name:"Francès",level:"Avançat",dots:4},
+      {name:"Italià",level:"Bàsic",dots:2},
+      {name:"Portuguès",level:"Bàsic",dots:2},
+      {name:"Alemany",level:"Bàsic",dots:2}
+    ],
+    tech:[
+      {label:"Microsoft Office",value:"Word · Excel · PowerPoint"},
+      {label:"Edició i Disseny",value:"CapCut · Canva · Photoshop · Lightroom"},
+      {label:"IA",value:"ChatGPT · Claude"}
+    ],
+    education:[
+      {per:"2024 – 2026",txt:"Màster en Màrqueting Digital — UEMC, Madrid"},
+      {per:"2025 – Actualitat",txt:"Màster en Intel·ligència Artificial — Big IA School, Madrid"},
+      {per:"2018 – 2020",txt:"Grau (Licence) en Ciència de l'Esport, Gestió d'Esdeveniments i Màrqueting (STAPS) — UPVD, Perpinyà (França)"},
+      {per:"2020 – 2021",txt:"Certificació d'anglès IELTS — UBC IELTS Institute, Canadà"}
+    ],
+    certificates:[
+      {per:"2020 – 2021",txt:"Monitor d'Esquí Nivell 2A — EFPEM, Andorra (Telemark · Freestyle · Competició)"},
+      {per:"2018 – 2019",txt:"Operador de Circuits Acrobàtics en Alçada (OPAH, Diploma d'Estat) — França"}
+    ],
+    experience:[
+      {role:"Responsable de Màrqueting (70%) i Monitor d'Esquí (30%)",company:"Adrenaline Ski School",location:"Verbier, Suïssa",dates:"Nov. 2024 – Actualitat",
+       details:[
+        "Planificar i gestionar campanyes de pagament a Meta Ads i Google Ads.",
+        "Fer el seguiment del rendiment, els pressupostos, les conversions i mètriques com CPC, CPL, CTR i ROAS.",
+        "Optimitzar les campanyes segons les dades de rendiment i els objectius de negoci.",
+        "Dur a terme recerca de paraules clau, segmentació d'audiències i anàlisi de la competència.",
+        "Crear i provar textos publicitaris, creativitats i propostes de landing pages.",
+        "Fer el seguiment de leads i resultats de les campanyes amb informes adequats.",
+        "Coordinar-me amb l'equip de disseny/contingut per a les creativitats i els requisits de campanya.",
+        "Compartir informes de rendiment setmanals/mensuals amb conclusions i recomanacions."
+      ]},
+      {role:"Auxiliar de Màrqueting",company:"Cirkel Supply",location:"Le Châble, Suïssa",dates:"Ag. 2024 – Nov. 2024",
+       details:[
+        "Ajudar en la planificació i execució de campanyes de màrqueting digital en diversos canals.",
+        "Donar suport a la gestió de campanyes de Meta Ads i Google Ads sota la supervisió de l'equip de màrqueting.",
+        "Fer el seguiment del rendiment de les campanyes i preparar informes bàsics de mètriques clau com CPC, CTR, conversions i engagement.",
+        "Crear i programar contingut per a les xarxes socials.",
+        "Ajudar a redactar textos de màrqueting per a anuncis, correus, blogs i publicacions a xarxes.",
+        "Dur a terme estudis de mercat i anàlisi de la competència per identificar tendències i oportunitats.",
+        "Ajudar a mantenir i actualitzar el lloc web i les landing pages de l'empresa.",
+        "Coordinar-me amb dissenyadors i creadors de contingut per preparar materials de màrqueting.",
+        "Fer el seguiment de leads i ajudar a mantenir els registres del CRM.",
+        "Ajudar a organitzar esdeveniments promocionals, llançaments de producte i activitats de màrqueting.",
+        "Ajudar a preparar informes setmanals i mensuals de rendiment de màrqueting."
+      ]},
+      {role:"Responsable de Màrqueting i Esdeveniments",company:"Snowdon AG (Hotel Schweizerhof)",location:"Saas-Fee, Suïssa",dates:"Jun. 2022 – Abr. 2024",
+       details:[
+        "Planificar i coordinar esdeveniments corporatius, accions promocionals i experiències de marca, del concepte a l'execució.",
+        "Gestionar la logística dels esdeveniments: espais, proveïdors, calendaris, pressupostos i operativa in situ.",
+        "Desenvolupar i executar campanyes de màrqueting d'esdeveniments per maximitzar l'assistència i l'engagement.",
+        "Supervisar els pressupostos dels esdeveniments, negociar amb proveïdors i controlar les despeses.",
+        "Liderar el muntatge, la coordinació i la resolució d'incidències in situ durant els esdeveniments en directe.",
+        "Crear materials promocionals i col·laborar amb l'equip de disseny per al branding dels esdeveniments.",
+        "Gestionar les inscripcions, la comunicació amb els assistents i el seguiment posterior.",
+        "Establir i mantenir relacions amb socis, patrocinadors i organitzacions locals.",
+        "Garantir que tots els esdeveniments s'alineen amb la identitat de marca i els objectius de negoci.",
+        "Identificar noves oportunitats d'esdeveniments per augmentar la notorietat de marca i la implicació dels clients."
+      ]},
+      {role:"Monitor d'Esquí",dates:"Des. 2021 – Abr. 2023",companies:[
+        {name:"Snow Academy Ski School",location:"Saalbach, Àustria",period:"Des. 2022 – Abr. 2023"},
+        {name:"ESKIMOS Ski School",location:"Suïssa",period:"Des. 2021 – Maig 2022"}
+      ]},
+      {role:"Monitor de Surf i Responsable d'Esdeveniments",company:"Islares Surf Camp",location:"Espanya",dates:"Jun. 2021 – Set. 2021"},
+      {role:"Animació i Logística d'Esdeveniments",company:"Belambra",location:"Borgo, Còrsega (França)",dates:"Jun. 2019 – Oct. 2019"},
+      {role:"Coordinador Auxiliar de Sector — Copa del Món UCI de BTT",company:"Vallnord S.A.",location:"Andorra",dates:"Jun. 2018 – Set. 2018",
+       note:"Vaig coordinar la logística de sector de la Copa del Món UCI de BTT (descens i camp a través)."}
+    ]
+  }
+};
+
+let lang = 'en';
+const openSet = new Set([0]); // first role open by default
+
+function dotsHtml(n){
+  let s='<span class="dots">';
+  for(let i=0;i<5;i++) s+=`<span class="dot${i<n?' on':''}"></span>`;
+  return s+'</span>';
+}
+
+function render(){
+  const d = DATA[lang];
+  document.documentElement.lang = lang;
+
+  const aside = `
+    <div class="sec">${svg('pin')}${d.sec.contact}</div>
+    <div class="crow">${svg('pin')}<span>${d.contact.address}</span></div>
+    <div class="crow">${svg('phone')}<span>${d.contact.phone1}</span></div>
+    <div class="crow">${svg('phone')}<span>${d.contact.phone2}</span></div>
+    <div class="crow">${svg('mail')}<a href="mailto:${d.contact.email}">${d.contact.email}</a></div>
+    <div class="crow">${svg('calendar')}<span>${d.contact.birth}</span></div>
+    <div class="crow">${svg('flag')}<span>${d.contact.nationality}</span></div>
+
+    <div class="sec">${svg('globe')}${d.sec.languages}</div>
+    ${d.languages.map(l=>`<div class="lang"><span class="lx"><b>${l.name}</b><span>${l.level}</span></span>${dotsHtml(l.dots)}</div>`).join('')}
+
+    <div class="sec">${svg('monitor')}${d.sec.tech}</div>
+    <div class="tech">${d.tech.map(t=>`<b>${t.label}</b><span>${t.value}</span>`).join('')}</div>
+
+    <div class="sec">${svg('cap')}${d.sec.education}</div>
+    ${d.education.map(e=>`<div class="item"><div class="per">${e.per}</div><div class="txt">${e.txt}</div></div>`).join('')}
+
+    <div class="sec">${svg('award')}${d.sec.certificates}</div>
+    ${d.certificates.map(e=>`<div class="item"><div class="per">${e.per}</div><div class="txt">${e.txt}</div></div>`).join('')}
+  `;
+
+  const exp = d.experience.map((e,i)=>{
+    const has = Array.isArray(e.details) && e.details.length;
+    const open = openSet.has(i);
+    if(has){
+      return `<div class="exp expandable${open?' open':''}" data-i="${i}">
+        <button class="exp-head" aria-expanded="${open}" data-toggle="${i}">
+          <span class="exp-l">
+            <span class="role">${e.role}${svg('chev','chev')}</span>
+            <span class="cco"><b>${e.company}</b><i>${e.location}</i></span>
+          </span>
+          <span class="dates">${e.dates}</span>
+        </button>
+        <div class="exp-desc"><div><ul>${e.details.map(x=>`<li>${x}</li>`).join('')}</ul></div></div>
+      </div>`;
+    }
+    const co = e.companies
+      ? e.companies.map(c=>`<span class="cco"><b>${c.name}</b><i>${c.location}</i><span class="subdate">${c.period}</span></span>`).join('')
+      : `<span class="cco"><b>${e.company}</b><i>${e.location}</i></span>`;
+    return `<div class="exp" data-i="${i}">
+      <div class="exp-head">
+        <span class="exp-l">
+          <span class="role">${e.role}</span>
+          ${co}
+        </span>
+        <span class="dates">${e.dates}</span>
+      </div>
+      ${e.note?`<div class="note">${e.note}</div>`:''}
+    </div>`;
+  }).join('');
+
+  const main = `
+    <div class="sec">${svg('user')}${d.sec.profile}</div>
+    <p class="profile">${d.profile}</p>
+    <div class="sec">${svg('briefcase')}${d.sec.experience}</div>
+    ${exp}
+  `;
+
+  document.getElementById('cv').innerHTML = `
+    <header class="top">
+      <div>
+        <h1 class="name">${d.name}</h1>
+        <div class="headline">${d.headline}</div>
+      </div>
+      <div class="controls">
+        <div class="seg" role="group" aria-label="Language">
+          <button data-lang="en" class="${lang==='en'?'active':''}">EN</button>
+          <button data-lang="ca" class="${lang==='ca'?'active':''}">CA</button>
+        </div>
+        <button class="print" id="printBtn">
+          <svg viewBox="0 0 24 24" style="stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          ${lang==='en'?'Save as PDF':'Desar en PDF'}</button>
+      </div>
+    </header>
+    <div class="grid">
+      <aside>${aside}</aside>
+      <section>${main}</section>
+    </div>`;
+
+  document.getElementById('foot').textContent = d.hint;
+
+  // wire language buttons
+  document.querySelectorAll('[data-lang]').forEach(b=>{
+    b.addEventListener('click',()=>{ lang=b.dataset.lang; render(); });
+  });
+  // wire expand toggles
+  document.querySelectorAll('[data-toggle]').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const i=+b.dataset.toggle;
+      const card=b.closest('.exp');
+      if(openSet.has(i)){openSet.delete(i);card.classList.remove('open');b.setAttribute('aria-expanded','false');}
+      else{openSet.add(i);card.classList.add('open');b.setAttribute('aria-expanded','true');}
+    });
+  });
+  document.getElementById('printBtn').addEventListener('click',()=>window.print());
+}
+
+render();
+</script>
+</body>
+</html>
